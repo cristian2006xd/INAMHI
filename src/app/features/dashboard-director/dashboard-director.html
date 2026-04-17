@@ -1,0 +1,46 @@
+<div class="container">
+    <h2>Panel de Aprobación - Direcciones</h2>
+
+    <mat-card>
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+            <ng-container matColumnDef="nombres">
+                <th mat-header-cell *matHeaderCellDef> Funcionario </th>
+                <td mat-cell *matCellDef="let tramite"> {{tramite.nombres}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="cargo">
+                <th mat-header-cell *matHeaderCellDef> Cargo </th>
+                <td mat-cell *matCellDef="let tramite"> {{tramite.cargo}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="fecha">
+                <th mat-header-cell *matHeaderCellDef> Fecha Solicitud </th>
+                <td mat-cell *matCellDef="let tramite"> {{tramite.fechaSolicitud}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="estado">
+                <th mat-header-cell *matHeaderCellDef> Estado </th>
+                <td mat-cell *matCellDef="let tramite">
+                    <span [class.aprobado]="tramite.estadoTIC === 'Aprobado'"
+                        [class.pendiente]="tramite.estadoTIC === 'Pendiente'">
+                        {{tramite.estadoTIC}}
+                    </span>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="acciones">
+                <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                <td mat-cell *matCellDef="let tramite">
+                    <button mat-button color="primary" (click)="aprobarTramite(tramite.id)"
+                        [disabled]="tramite.estadoTIC === 'Aprobado'">
+                        <mat-icon>check_circle</mat-icon> Aprobar
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="columnasMostradas"></tr>
+            <tr mat-row *matRowDef="let row; columns: columnasMostradas;"></tr>
+        </table>
+    </mat-card>
+</div>

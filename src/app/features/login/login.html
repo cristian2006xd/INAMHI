@@ -1,0 +1,41 @@
+<div class="login-container">
+  <mat-card class="login-card">
+    <mat-card-header class="header-center">
+      <div class="logo-placeholder">
+        <mat-icon>cloud</mat-icon>
+      </div>
+      <mat-card-title>Sistema Paz y Salvo</mat-card-title>
+      <mat-card-subtitle>Instituto Nacional de Meteorología e Hidrología</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="loginForm" class="login-form">
+        
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Correo Institucional</mat-label>
+          <mat-icon matPrefix>email</mat-icon>
+          <input matInput formControlName="correo" placeholder="ejemplo@inamhi.gob.ec" type="email">
+          <mat-error *ngIf="loginForm.get('correo')?.hasError('email')">
+            Ingresa un correo válido
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Contraseña</mat-label>
+          <mat-icon matPrefix>lock</mat-icon>
+          <input matInput [type]="ocultarPassword ? 'password' : 'text'" formControlName="password">
+          <button mat-icon-button matSuffix (click)="ocultarPassword = !ocultarPassword" type="button">
+            <mat-icon>{{ocultarPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+
+      </form>
+    </mat-card-content>
+
+    <mat-card-actions class="actions-center">
+      <button mat-raised-button color="primary" class="btn-login" [disabled]="loginForm.invalid" (click)="iniciarSesion()">
+        Iniciar Sesión
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

@@ -1,0 +1,19 @@
+.container {
+    padding: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+table {
+    width: 100%;
+}
+
+.aprobado {
+    color: green;
+    font-weight: bold;
+}
+
+.pendiente {
+    color: orange;
+    font-weight: bold;
+}

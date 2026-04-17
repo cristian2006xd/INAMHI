@@ -1,0 +1,52 @@
+.navbar {
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  position: relative;
+  z-index: 10;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
+  font-size: 1.3rem;
+  margin-right: 20px;
+  letter-spacing: 1px;
+}
+
+/* Ocupa el espacio vacío para separar el logo de los botones */
+.spacer {
+  flex: 1 1 auto;
+}
+
+/* Botones del menú */
+button[mat-button] {
+  margin: 0 4px;
+  font-weight: 500;
+  
+  mat-icon {
+    margin-right: 4px;
+  }
+}
+
+/* Resalta el botón de la página en la que estamos parados */
+.active-link {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+.logout-btn {
+  margin-left: 10px;
+  color: #ffcdd2; // Un tono rojizo claro para destacar que es "salir"
+  
+  &:hover {
+    color: #ff5252;
+  }
+}
+
+/* Aseguramos que el contenido ocupe el resto de la pantalla y el fondo sea consistente */
+.main-content {
+  height: calc(100vh - 64px); /* 64px es la altura estándar del navbar */
+  overflow-y: auto;
+  background-color: #f0f2f5; 
+}

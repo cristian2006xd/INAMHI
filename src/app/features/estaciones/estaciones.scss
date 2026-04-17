@@ -1,0 +1,69 @@
+.container {
+    padding: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+h2 {
+    color: #1f3b73; // Azul institucional INAMHI
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.table-card {
+    padding: 0;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+table {
+    width: 100%;
+}
+
+th.mat-header-cell {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+    background-color: #f8f9fa;
+}
+
+td.mat-cell {
+    font-size: 0.95rem;
+    color: #555;
+}
+
+/* --- Estilos visuales para los Estados --- */
+.operativa {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.85rem;
+    display: inline-block;
+}
+
+.mantenimiento {
+    background-color: #fff3e0;
+    color: #ef6c00;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.85rem;
+    display: inline-block;
+}
+
+/* Asegurar que la columna de acciones no sea muy ancha */
+.mat-column-acciones {
+    width: 80px;
+    text-align: center;
+}
+
+tr.mat-row:hover {
+    background-color: #f1f5f9;
+    transition: background-color 0.2s ease;
+}

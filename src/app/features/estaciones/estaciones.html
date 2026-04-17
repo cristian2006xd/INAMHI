@@ -1,0 +1,45 @@
+<div class="container">
+    <h2>Gestión de Estaciones Meteorológicas</h2>
+
+    <mat-card class="table-card">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+            <ng-container matColumnDef="codigo">
+                <th mat-header-cell *matHeaderCellDef> Código </th>
+                <td mat-cell *matCellDef="let estacion"> {{estacion.codigo}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="nombre">
+                <th mat-header-cell *matHeaderCellDef> Nombre de la Estación </th>
+                <td mat-cell *matCellDef="let estacion"> {{estacion.nombre}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="provincia">
+                <th mat-header-cell *matHeaderCellDef> Provincia </th>
+                <td mat-cell *matCellDef="let estacion"> {{estacion.provincia}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="estado">
+                <th mat-header-cell *matHeaderCellDef> Estado </th>
+                <td mat-cell *matCellDef="let estacion">
+                    <span [class.operativa]="estacion.estado === 'Operativa'"
+                        [class.mantenimiento]="estacion.estado === 'Mantenimiento'">
+                        {{estacion.estado}}
+                    </span>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="acciones">
+                <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                <td mat-cell *matCellDef="let estacion">
+                    <button mat-icon-button color="primary">
+                        <mat-icon>visibility</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="columnasAMostrar"></tr>
+            <tr mat-row *matRowDef="let row; columns: columnasAMostrar;"></tr>
+        </table>
+    </mat-card>
+</div>

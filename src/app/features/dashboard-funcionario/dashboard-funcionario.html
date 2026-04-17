@@ -1,0 +1,138 @@
+<div class="container">
+  <div class="header-inamhi">
+    <h1>Formulario Paz y Salvo</h1>
+    <p>Para el pago de liquidación de haberes - INAMHI</p>
+  </div>
+
+  <mat-card class="status-card" *ngIf="estadoTramite === 'Pendiente'">
+    <mat-card-content>
+      <mat-icon color="accent">hourglass_empty</mat-icon>
+      Tu formulario ha sido enviado. Ahora está en proceso de revisión y firma por las direcciones correspondientes.
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card id="documento-paz-y-salvo" class="main-form-card" *ngIf="estadoTramite === 'Nuevo'">
+    <form [formGroup]="pazYSalvoForm">
+      
+      <h2 class="section-title">1. Datos Personales</h2>
+      <mat-divider></mat-divider>
+      
+      <div class="form-grid mt-15">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Nombres y Apellidos Completos</mat-label>
+          <input matInput formControlName="nombres" placeholder="Ej. Juan Pérez">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Modalidad Laboral</mat-label>
+          <mat-select formControlName="modalidadLaboral">
+            <mat-option value="Permanente">Nombramiento Permanente</mat-option>
+            <mat-option value="Provisional">Nombramiento Provisional</mat-option>
+            <mat-option value="Ocasional">Contrato Ocasional</mat-option>
+            <mat-option value="Trabajo">Contrato de Trabajo</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Cédula o Pasaporte</mat-label>
+          <input matInput formControlName="cedula" type="text" maxlength="10">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Fecha de Ingreso</mat-label>
+          <input matInput formControlName="fechaIngreso" type="date">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Fecha de Salida</mat-label>
+          <input matInput formControlName="fechaSalida" type="date">
+        </mat-form-field>
+      </div>
+
+      <div class="form-grid">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Dirección Domiciliaria</mat-label>
+          <input matInput formControlName="direccion">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Número Domicilio</mat-label>
+          <input matInput formControlName="numeroDomicilio">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Número Celular</mat-label>
+          <input matInput formControlName="numeroCelular">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Contacto de Emergencia</mat-label>
+          <input matInput formControlName="numeroEmergencia">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Email Personal 1</mat-label>
+          <input matInput formControlName="email1" type="email">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Email Personal 2 (Opcional)</mat-label>
+          <input matInput formControlName="email2" type="email">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Provincia</mat-label>
+          <input matInput formControlName="provincia">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Cantón</mat-label>
+          <input matInput formControlName="canton">
+        </mat-form-field>
+      </div>
+
+      <br>
+
+      <h2 class="section-title">2. Datos de la Dirección/Unidad</h2>
+      <mat-divider></mat-divider>
+
+      <div class="radio-group-container mt-15">
+        <label>Lugar de Trabajo:</label>
+        <mat-radio-group formControlName="lugarTrabajo" color="primary">
+          <mat-radio-button value="Planta Central">Planta Central</mat-radio-button>
+          <mat-radio-button value="Procesos Desconcentrados">Procesos Desconcentrados</mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <div class="form-grid">
+        <mat-form-field appearance="outline">
+          <mat-label>Dirección / Unidad a la que pertenecía</mat-label>
+          <input matInput formControlName="direccionUnidad">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Cargo que Desempeñaba</mat-label>
+          <input matInput formControlName="cargo">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Grupo Ocupacional</mat-label>
+          <input matInput formControlName="grupoOcupacional">
+        </mat-form-field>
+      </div>
+    </form>
+
+    <mat-card-actions class="actions-container">
+      <button mat-raised-button color="primary" class="btn-large" (click)="enviarTramite()">
+        <mat-icon>send</mat-icon> Enviar para Aprobación
+      </button>
+    </mat-card-actions>
+  </mat-card>
+
+  <div class="download-section" *ngIf="estadoTramite === 'Completado'">
+    <button mat-raised-button color="accent" class="btn-large" (click)="generarPDF()">
+      <mat-icon>picture_as_pdf</mat-icon> Descargar PDF Completo para FirmaEC
+    </button>
+  </div>
+
+</div>
