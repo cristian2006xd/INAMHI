@@ -1,34 +1,63 @@
-<mat-toolbar color="primary" class="navbar" *ngIf="authService.isLoggedIn()">
+<mat-toolbar class="navbar-inamhi" *ngIf="authService.isLoggedIn()">
+  <span class="logo" routerLink="/dashboard" style="cursor: pointer;">INAMHI</span>
   
-  <span class="logo-container">
-    <mat-icon>cloud</mat-icon>
-    <span>INAMHI</span>
-  </span>
-
   <span class="spacer"></span>
 
-  <button mat-button routerLink="/funcionario" routerLinkActive="active-link">
-    <mat-icon>person</mat-icon> Mi Trámite
+  <button mat-button 
+          routerLink="/datos-personales" 
+          [ngClass]="((formStatus.status$ | async)?.personales) ? 'btn-verde' : 'btn-rojo'">
+    <mat-icon>account_box</mat-icon> Personales
   </button>
 
-  <button mat-button routerLink="/director" routerLinkActive="active-link">
-    <mat-icon>fact_check</mat-icon> Aprobaciones
+  <button mat-button 
+          routerLink="/gestion-tecnologias" 
+          [ngClass]="((formStatus.status$ | async)?.tic) ? 'btn-verde' : 'btn-rojo'">
+    <mat-icon>devices</mat-icon> TIC
   </button>
 
-  <button mat-button routerLink="/estaciones" routerLinkActive="active-link">
-    <mat-icon>sensors</mat-icon> Estaciones
+  <button mat-button 
+          routerLink="/gestion-financiera" 
+          [ngClass]="((formStatus.status$ | async)?.financiero) ? 'btn-verde' : 'btn-rojo'">
+    <mat-icon>payments</mat-icon> Financiero
   </button>
 
-  <button mat-button routerLink="/historial" routerLinkActive="active-link">
-    <mat-icon>history</mat-icon> Historial
+  <button mat-button 
+          routerLink="/seguridad-informacion" 
+          [ngClass]="((formStatus.status$ | async)?.seguridad) ? 'btn-verde' : 'btn-rojo'">
+    <mat-icon>security</mat-icon> Seguridad
   </button>
 
-  <button mat-icon-button class="logout-btn" (click)="cerrarSesion()" title="Cerrar Sesión">
+  <button mat-button 
+          routerLink="/recursos-humanos" 
+          [ngClass]="((formStatus.status$ | async)?.rrhh) ? 'btn-verde' : 'btn-rojo'">
+    <mat-icon>groups</mat-icon> RRHH
+  </button>
+
+  <button mat-button 
+          routerLink="/recepcion-documentos" 
+          [ngClass]="((formStatus.status$ | async)?.recepcion) ? 'btn-verde' : 'btn-rojo'">
+    <mat-icon>inventory_2</mat-icon> Recepción
+  </button>
+
+  <button mat-button 
+          routerLink="/datos-direccion" 
+          [ngClass]="((formStatus.status$ | async)?.direccion) ? 'btn-verde' : 'btn-rojo'">
+    <mat-icon>location_city</mat-icon> Dirección
+  </button>
+
+  <button mat-button 
+          routerLink="/direccion-financiera" 
+          [ngClass]="((formStatus.status$ | async)?.dirFinanciera) ? 'btn-verde' : 'btn-rojo'">
+    <mat-icon>account_balance</mat-icon> Dir. Financiera
+  </button>
+
+  <span class="spacer"></span>
+  
+  <button mat-icon-button (click)="cerrarSesion()" title="Cerrar Sesión">
     <mat-icon>exit_to_app</mat-icon>
   </button>
-
 </mat-toolbar>
 
-<div class="main-content">
+<div class="main-container">
   <router-outlet></router-outlet>
 </div>

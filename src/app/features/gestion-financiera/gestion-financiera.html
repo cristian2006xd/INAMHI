@@ -1,0 +1,112 @@
+<div style="display: flex; justify-content: center; align-items: center; min-height: 100vh; width: 100%; background-color: #f4f7f6; padding: 20px;">
+  
+  <div class="container" style="max-width: 1100px; margin: 0 auto;">
+    <div class="card border-0 shadow-lg" style="border-radius: 12px; overflow: hidden;">
+      
+      <div class="card-header border-0 py-3" style="background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);">
+        <h6 class="mb-0 text-uppercase fw-bold text-white text-center" style="letter-spacing: 1.5px; font-size: 0.9rem;">
+          <i class="fas fa-hand-holding-usd me-2"></i>Gestión Financiera
+        </h6>
+      </div>
+
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-bordered mb-0 align-middle" style="border-collapse: collapse;">
+            <thead class="text-center small fw-bold" style="background-color: #f1f5f9; color: #475569;">
+              <tr>
+                <td style="width: 35%;" class="py-3">DETALLE DE PENDIENTES</td>
+                <td style="width: 4%;">SI</td>
+                <td style="width: 4%;">NO</td>
+                <td style="width: 15%;">VALOR A DESCONTAR</td>
+                <td style="width: 15%;">OBSERVACIÓN</td>
+                <td style="width: 13.5%;">NOMBRE RESPONSABLE</td>
+                <td style="width: 13.5%;">FIRMA</td>
+              </tr>
+            </thead>
+            
+            <tbody class="small">
+              <tr>
+                <td class="text-uppercase p-2 bg-light-subtle" style="font-size: 0.75rem; line-height: 1.2;">
+                  ¿Tiene valores pendientes de pago por saldos contables? 
+                  <div class="text-muted fw-normal" style="font-size: 0.65rem;">(Viáticos, Caja Chica, Pasajes Aéreos)</div>
+                </td>
+                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none"></td>
+                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none"></td>
+                <td class="p-0">
+                  <div class="input-group input-group-sm">
+                    <span class="input-group-text border-0 bg-transparent ps-3" style="color: #059669;">$</span>
+                    <input type="number" class="form-control border-0 shadow-none fw-bold" style="background-color: #ecfdf5;" placeholder="0.00">
+                  </div>
+                </td>
+                <td class="p-0"><input type="text" class="form-control form-control-sm border-0 h-100 shadow-none px-2" placeholder="Nota..."></td>
+                <td rowspan="4" class="p-0">
+                  <input type="text" class="form-control form-control-sm border-0 h-100 text-center fw-bold shadow-none" placeholder="Nombre completo">
+                </td>
+                <td rowspan="4" class="bg-white" style="position: relative;">
+                  <div style="position: absolute; bottom: 15px; left: 10%; width: 80%; border-top: 1px solid #cbd5e1;"></div>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="text-uppercase p-2 bg-light-subtle" style="font-size: 0.75rem;">¿Tiene valores pendientes de pago por anticipo de sueldos?</td>
+                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none"></td>
+                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none"></td>
+                <td class="p-0">
+                  <div class="input-group input-group-sm">
+                    <span class="input-group-text border-0 bg-transparent ps-3" style="color: #059669;">$</span>
+                    <input type="number" class="form-control border-0 shadow-none fw-bold" style="background-color: #ecfdf5;" placeholder="0.00">
+                  </div>
+                </td>
+                <td class="p-0"><input type="text" class="form-control form-control-sm border-0 h-100 shadow-none px-2"></td>
+              </tr>
+
+              <tr>
+                <td class="text-uppercase p-2 bg-light-subtle" style="font-size: 0.75rem;">¿Tiene valores pendientes de pago por recuperación de valores?</td>
+                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none"></td>
+                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none"></td>
+                <td class="p-0">
+                  <div class="input-group input-group-sm">
+                    <span class="input-group-text border-0 bg-transparent ps-3" style="color: #059669;">$</span>
+                    <input type="number" class="form-control border-0 shadow-none fw-bold" style="background-color: #ecfdf5;" placeholder="0.00">
+                  </div>
+                </td>
+                <td class="p-0"><input type="text" class="form-control form-control-sm border-0 h-100 shadow-none px-2"></td>
+              </tr>
+
+              <tr>
+                <td class="text-uppercase p-2 bg-light-subtle" style="font-size: 0.75rem;">¿Tiene valores pendientes por devolución de muebles y equipos?</td>
+                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none"></td>
+                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none"></td>
+                <td class="p-0">
+                  <div class="input-group input-group-sm">
+                    <span class="input-group-text border-0 bg-transparent ps-3" style="color: #059669;">$</span>
+                    <input type="number" class="form-control border-0 shadow-none fw-bold" style="background-color: #ecfdf5;" placeholder="0.00">
+                  </div>
+                </td>
+                <td class="p-0"><input type="text" class="form-control form-control-sm border-0 h-100 shadow-none px-2"></td>
+              </tr>
+
+              <tr>
+                <td colspan="5" class="bg-light fw-bold text-uppercase p-2 text-center" style="font-size: 0.7rem; color: #475569;">
+                  Nombre del/la Director/a Administrativo/a Financiero/a
+                </td>
+                <td colspan="2" class="bg-light fw-bold text-uppercase p-2 text-center" style="font-size: 0.7rem; color: #475569;">
+                  Firma de Autorización
+                </td>
+              </tr>
+              <tr>
+                <td colspan="5" class="p-0 bg-white">
+                  <input type="text" class="form-control form-control-sm border-0 text-center py-3 fw-bold shadow-none" placeholder="NOMBRE DE LA AUTORIDAD">
+                </td>
+                <td colspan="2" class="p-0 bg-white" style="height: 60px; vertical-align: bottom;">
+                   <div class="mx-auto mb-2" style="width: 70%; border-top: 1px solid #cbd5e1;"></div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

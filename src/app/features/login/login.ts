@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
-
 // Módulos de Angular Material
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
@@ -34,7 +33,8 @@ export class Login implements OnInit {
   constructor(
     private fb: FormBuilder, 
     private router: Router,
-    private AuthService: AuthService
+    // Corregido: usa minúscula para la instancia 'authService'
+    private authService: AuthService 
   ) {}
 
   ngOnInit(): void {
@@ -48,10 +48,24 @@ export class Login implements OnInit {
     if (this.loginForm.valid) {
       const { correo } = this.loginForm.value;
       
-      // Simulamos la entrada asignando el rol de funcionario. 
-      // Más adelante aquí irá la validación real con tu base de datos.
-      this.AuthService.login(correo, 'funcionario');
-      this.router.navigate(['/funcionario']);
+      console.log('Intentando iniciar sesión...');
+
+      // 1. Ejecutamos el login en el servicio
+      this.authService.login(correo, 'funcionario');
+      
+      // 2. CORRECCIÓN CLAVE: Navegar a una ruta existente
+      // Cambiamos '/funcionario' por '/datos-personales' o '/dashboard'
+      this.router.navigate(['/datos-personales']).then(nav => {
+        if(nav) {
+          console.log('Navegación exitosa');
+        } else {
+          console.error('Fallo en la navegación. Verifica que /datos-personales existe en app.routes.ts');
+        }
+      });
+
+    } else {
+      console.warn('El formulario no es válido');
+      this.loginForm.markAllAsTouched();
     }
   }
 }

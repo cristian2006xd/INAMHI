@@ -1,0 +1,110 @@
+<div style="display: flex; justify-content: center; align-items: center; min-height: 100vh; width: 100%; background-color: #f4f7f6; padding: 20px;">
+  
+  <div class="container" style="max-width: 1150px; margin: 0 auto;" [formGroup]="ticForm">
+    <div class="card border-0 shadow-lg" style="border-radius: 12px; overflow: hidden;">
+      
+      <div class="card-header border-0 py-3" style="background: linear-gradient(135deg, #0f172a 0%, #334155 100%);">
+        <h6 class="mb-0 text-uppercase fw-bold text-white text-center" style="letter-spacing: 1.5px; font-size: 0.9rem;">
+          <i class="fas fa-laptop-code me-2"></i>Gestión de Tecnologías de la Información y Comunicación
+        </h6>
+      </div>
+
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-bordered mb-0 align-middle" style="border-collapse: collapse;">
+            <thead class="text-center small fw-bold" style="background-color: #f1f5f9; color: #475569;">
+              <tr>
+                <td style="width: 30%;" class="py-3">DETALLE</td>
+                <td style="width: 3%;">SI</td>
+                <td style="width: 3%;">NO</td>
+                <td style="width: 30%;">DETALLE ADICIONAL</td>
+                <td style="width: 3%;">SI</td>
+                <td style="width: 3%;">NO</td>
+                <td style="width: 14%;">NOMBRE RESPONSABLE</td>
+                <td style="width: 14%;">FIRMA</td>
+              </tr>
+            </thead>
+            
+            <tbody class="small">
+              <tr>
+                <td class="text-uppercase p-2 bg-light-subtle" style="font-size: 0.75rem;">¿Se realizó la verificación del equipo informático?</td>
+                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none" formControlName="verificacionEquipo"></td>
+                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none"></td>
+                <td colspan="3" class="p-0">
+                  <div class="d-flex align-items-center h-100">
+                    <span class="small text-uppercase px-2 py-2 fw-bold bg-light border-end" style="font-size: 0.65rem; min-width: 100px;">Observación:</span>
+                    <input type="text" class="form-control form-control-sm border-0 flex-grow-1 shadow-none px-2" formControlName="observacionEquipo">
+                  </div>
+                </td>
+                <td rowspan="2" class="p-0">
+                  <input type="text" class="form-control form-control-sm border-0 h-100 text-center fw-bold shadow-none" placeholder="NOMBRE..." formControlName="responsableNombre" style="background-color: #fff;">
+                </td>
+                <td rowspan="2" class="bg-white" style="position: relative;">
+                  <div style="position: absolute; bottom: 10px; left: 10%; width: 80%; border-top: 1px solid #cbd5e1;"></div>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="text-uppercase p-2 bg-light-subtle" style="font-size: 0.75rem;">¿Tiene acceso a IP fija WI-FI y/o móvil?</td>
+                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none" formControlName="accesoIp"></td>
+                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none"></td>
+                <td class="text-uppercase p-2 text-center text-muted" style="font-size: 0.7rem;">¿Se realizó la liberación?</td>
+                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none" formControlName="liberacionIp"></td>
+                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none"></td>
+              </tr>
+
+              <tr>
+                <td class="text-uppercase p-2 bg-light-subtle" style="font-size: 0.75rem;">Retiro de control de acceso (Contraseñas)</td>
+                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none" formControlName="retiroContrasenas"></td>
+                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none"></td>
+                <td class="text-uppercase p-2 bg-light-subtle" style="font-size: 0.75rem;">Entrega del backup de la información</td>
+                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none" formControlName="entregaBackup"></td>
+                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none"></td>
+                <td rowspan="3" class="p-0">
+                  <input type="text" class="form-control form-control-sm border-0 h-100 text-center fw-bold shadow-none" placeholder="NOMBRE..." style="background-color: #fff;">
+                </td>
+                <td rowspan="3" class="bg-white" style="position: relative;">
+                  <div style="position: absolute; bottom: 10px; left: 10%; width: 80%; border-top: 1px solid #cbd5e1;"></div>
+                </td>
+              </tr>
+
+              <tr>
+                <td rowspan="2" class="text-uppercase p-3 text-center fw-bold bg-light" style="font-size: 0.75rem; color: #1e293b;">
+                  ¿Se realizó el cierre de las cuentas?
+                </td>
+                <td colspan="2" class="p-0 bg-white">
+                  <div class="border-bottom py-1 small text-center fw-bold text-muted" style="font-size: 0.6rem;">SI / NO</div>
+                  <div class="text-center py-2"><input type="checkbox" class="form-check-input shadow-none border-primary" formControlName="cierreCuentas"></div>
+                </td>
+                <td colspan="3" class="p-0">
+                  <div class="d-flex border-bottom align-items-center">
+                    <span class="small text-uppercase px-2 py-1 flex-grow-1" style="font-size: 0.65rem;">Correo Institucional</span>
+                    <div class="border-start px-3 py-1"><input type="checkbox" class="form-check-input shadow-none" formControlName="correoInstitucional"></div>
+                  </div>
+                  <div class="d-flex border-bottom align-items-center">
+                    <span class="small text-uppercase px-2 py-1 flex-grow-1" style="font-size: 0.65rem;">QUIPUX</span>
+                    <div class="border-start px-3 py-1"><input type="checkbox" class="form-check-input shadow-none" formControlName="quipux"></div>
+                  </div>
+                  <div class="d-flex align-items-center">
+                    <span class="small text-uppercase px-2 py-1 flex-grow-1" style="font-size: 0.65rem;">eSIGEF / SPRYN / eSByE</span>
+                    <div class="border-start px-3 py-1"><input type="checkbox" class="form-check-input shadow-none" formControlName="esigef"></div>
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="text-center p-0 bg-white"><input type="checkbox" class="form-check-input shadow-none"></td>
+                <td class="text-center p-0 bg-white"><input type="checkbox" class="form-check-input shadow-none"></td>
+                <td colspan="3" class="small text-uppercase p-2 bg-light-subtle fw-bold" style="font-size: 0.7rem;">
+                  ¿Se realizó la entrega y desactivación de la tarjeta de acceso?
+                  <input type="checkbox" class="form-check-input ms-3 shadow-none border-primary" formControlName="tarjetaAcceso">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,33 +1,49 @@
-import { Routes } from "@angular/router";
-import { DashboardFuncionarioComponent } from "./features/dashboard-funcionario/dashboard-funcionario";
-import { Login } from "./features/login/login";
-import { authGuard } from "./core/guards/auth-guard";
-import { DashboardDirectorComponent } from "./features/dashboard-director/dashboard-director";
-import { EstacionesComponent } from "./features/estaciones/estaciones";
-import { HistorialComponent } from "./features/historial/historial";
+import { Routes } from '@angular/router';
 
 export const routes: Routes = [
-  { path: 'login', component: Login },
-  { 
-    path: 'funcionario', 
-    component: DashboardFuncionarioComponent, 
-    canActivate: [authGuard] // Protegida
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full'
   },
-  { 
-    path: 'director', 
-    component: DashboardDirectorComponent, 
-    canActivate: [authGuard] // Protegida
+  {
+    path: 'login',
+    loadComponent: () => import('./features/login/login').then(m => m.Login)
   },
-  { 
-    path: 'estaciones', 
-    component: EstacionesComponent, 
-    canActivate: [authGuard] 
+  {
+    path: 'datos-personales',
+    loadComponent: () => import('./features/dashboard-funcionario/dashboard-funcionario').then(m => m.DatosPersonales)
   },
-  { 
-    path: 'historial', 
-    component: HistorialComponent, 
-    canActivate: [authGuard] 
+  {
+    path: 'gestion-tecnologias',
+    loadComponent: () => import('./features/gestion-tecnologias/gestion-tecnologias').then(m => m.GestionTecnologiasComponent)
   },
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: '**', redirectTo: '/login' }
+  {
+    path: 'gestion-financiera',
+    loadComponent: () => import('./features/gestion-financiera/gestion-financiera').then(m => m.GestionFinanciera)
+  },
+  {
+    path: 'seguridad-informacion',
+    loadComponent: () => import('./features/seguridad-informacion/seguridad-informacion').then(m => m.SeguridadInformacion)
+  },
+  {
+    path: 'recursos-humanos',
+    loadComponent: () => import('./features/recursos-humanos/recursos-humanos').then(m => m.RecursosHumanos)
+  },
+  {
+    path: 'recepcion-documentos',
+    loadComponent: () => import('./features/recepcion-documentos/recepcion-documentos').then(m => m.RecepcionDocumentos)
+  },
+  {
+    path: 'datos-direccion',
+    loadComponent: () => import('./features/datos-direccion/datos-direccion').then(m => m.DatosDireccion)
+  },
+  {
+  path: 'direccion-financiera',
+  loadComponent: () => import('./features/direccion-financiera/direccion-financiera').then(m => m.DireccionFinanciera)
+ },
+   {
+    path: '**',
+    redirectTo: 'login' // Si escriben cualquier cosa mal, al login
+  }
 ];

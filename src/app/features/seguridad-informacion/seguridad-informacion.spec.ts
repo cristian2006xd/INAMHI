@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DatosPersonales } from './dashboard-funcionario';
+import { SeguridadInformacion } from './seguridad-informacion';
 
-describe('DashboardFuncionario', () => {
-  let component: DatosPersonales;
-  let fixture: ComponentFixture<DatosPersonales>;
+describe('SeguridadInformacion', () => {
+  let component: SeguridadInformacion;
+  let fixture: ComponentFixture<SeguridadInformacion>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DatosPersonales],
+      imports: [SeguridadInformacion],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(DatosPersonales);
+    fixture = TestBed.createComponent(SeguridadInformacion);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

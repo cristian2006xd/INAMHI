@@ -1,138 +1,119 @@
-<div class="container">
-  <div class="header-inamhi">
-    <h1>Formulario Paz y Salvo</h1>
-    <p>Para el pago de liquidación de haberes - INAMHI</p>
-  </div>
+<div style="display: flex; justify-content: center; align-items: center; min-height: 100vh; width: 100%; background-color: #f4f7f6; padding: 20px;">
+  
+  <div class="container" style="max-width: 1150px; margin: 0 auto;">
+    <form [formGroup]="datosPersonalesForm">
+      <div class="card border-0 shadow-lg" style="border-radius: 12px; overflow: hidden;">
+        
+        <div class="card-header border-0 py-3" style="background: linear-gradient(135deg, #1e293b 0%, #334155 100%);">
+          <h6 class="mb-0 text-uppercase fw-bold text-white text-center" style="letter-spacing: 2px; font-size: 0.9rem;">
+            <i class="fas fa-user-circle me-2"></i>Datos Personales - Formulario de Paz y Salvo
+          </h6>
+        </div>
 
-  <mat-card class="status-card" *ngIf="estadoTramite === 'Pendiente'">
-    <mat-card-content>
-      <mat-icon color="accent">hourglass_empty</mat-icon>
-      Tu formulario ha sido enviado. Ahora está en proceso de revisión y firma por las direcciones correspondientes.
-    </mat-card-content>
-  </mat-card>
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table table-bordered mb-0 align-middle" style="border-collapse: collapse;">
+              <tbody>
+                <tr>
+                  <td class="bg-light fw-bold small text-uppercase p-3" style="width: 15%; color: #475569;">Nombres y Apellidos:</td>
+                  <td style="width: 25%;" class="p-0 bg-white">
+                    <input type="text" formControlName="nombreCompleto" class="form-control form-control-sm border-0 shadow-none px-3 py-3 fw-bold" placeholder="NOMBRE COMPLETO">
+                  </td>
+                  <td class="bg-light fw-bold small text-uppercase text-center p-3" style="width: 15%; color: #475569;">Cédula / Pasaporte:</td>
+                  <td style="width: 15%;" class="p-0 bg-white">
+                    <input type="text" formControlName="cedula" class="form-control form-control-sm border-0 shadow-none text-center py-3 fw-bold" placeholder="0000000000">
+                  </td>
+                  <td class="bg-light fw-bold small text-uppercase p-3" style="width: 15%; color: #475569;">Número Domicilio:</td>
+                  <td style="width: 15%;" class="p-0 bg-white">
+                    <input type="text" formControlName="telefonoFijo" class="form-control form-control-sm border-0 shadow-none text-center py-3" placeholder="02-XXXXXXX">
+                  </td>
+                </tr>
 
-  <mat-card id="documento-paz-y-salvo" class="main-form-card" *ngIf="estadoTramite === 'Nuevo'">
-    <form [formGroup]="pazYSalvoForm">
-      
-      <h2 class="section-title">1. Datos Personales</h2>
-      <mat-divider></mat-divider>
-      
-      <div class="form-grid mt-15">
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Nombres y Apellidos Completos</mat-label>
-          <input matInput formControlName="nombres" placeholder="Ej. Juan Pérez">
-        </mat-form-field>
+                <tr>
+                  <td rowspan="4" class="bg-light fw-bold small text-uppercase align-top p-3" style="color: #475569;">Modalidad Laboral:</td>
+                  <td class="p-0 bg-white">
+                    <div class="d-flex align-items-center px-3 py-2 border-bottom hover-bg-light">
+                      <span class="small text-uppercase flex-grow-1 fw-semibold" style="font-size: 0.65rem;">Nombramiento Permanente</span>
+                      <input type="radio" value="permanente" formControlName="modalidad" class="form-check-input shadow-none m-0 border-primary">
+                    </div>
+                  </td>
+                  <td rowspan="2" class="bg-light fw-bold small text-uppercase text-center p-3" style="color: #1e40af; background-color: #eff6ff !important;">Fecha Ingreso:</td>
+                  <td rowspan="2" class="p-0 bg-white">
+                    <input type="date" formControlName="fechaIngreso" class="form-control form-control-sm border-0 shadow-none px-3 py-4 text-center fw-bold">
+                  </td>
+                  <td class="bg-light fw-bold small text-uppercase p-3" style="color: #475569;">Número Celular:</td>
+                  <td class="p-0 bg-white">
+                    <input type="text" formControlName="celular" class="form-control form-control-sm border-0 shadow-none text-center py-3" placeholder="09XXXXXXXX">
+                  </td>
+                </tr>
 
-        <mat-form-field appearance="outline">
-          <mat-label>Modalidad Laboral</mat-label>
-          <mat-select formControlName="modalidadLaboral">
-            <mat-option value="Permanente">Nombramiento Permanente</mat-option>
-            <mat-option value="Provisional">Nombramiento Provisional</mat-option>
-            <mat-option value="Ocasional">Contrato Ocasional</mat-option>
-            <mat-option value="Trabajo">Contrato de Trabajo</mat-option>
-          </mat-select>
-        </mat-form-field>
+                <tr>
+                  <td class="p-0 bg-white">
+                    <div class="d-flex align-items-center px-3 py-2 border-bottom hover-bg-light">
+                      <span class="small text-uppercase flex-grow-1 fw-semibold" style="font-size: 0.65rem;">Nombramiento Provisional</span>
+                      <input type="radio" value="provisional" formControlName="modalidad" class="form-check-input shadow-none m-0 border-primary">
+                    </div>
+                  </td>
+                  <td class="bg-light fw-bold small text-uppercase p-3" style="color: #475569;">Contacto Emergencia:</td>
+                  <td class="p-0 bg-white">
+                    <input type="text" formControlName="contactoEmergencia" class="form-control form-control-sm border-0 shadow-none px-3 py-3" placeholder="Nombre / Teléfono">
+                  </td>
+                </tr>
 
-        <mat-form-field appearance="outline">
-          <mat-label>Cédula o Pasaporte</mat-label>
-          <input matInput formControlName="cedula" type="text" maxlength="10">
-        </mat-form-field>
+                <tr>
+                  <td class="p-0 bg-white">
+                    <div class="d-flex align-items-center px-3 py-2 border-bottom hover-bg-light">
+                      <span class="small text-uppercase flex-grow-1 fw-semibold" style="font-size: 0.65rem;">Contrato Ocasional</span>
+                      <input type="radio" value="ocasional" formControlName="modalidad" class="form-check-input shadow-none m-0 border-primary">
+                    </div>
+                  </td>
+                  <td rowspan="2" class="bg-light fw-bold small text-uppercase text-center p-3" style="color: #b91c1c; background-color: #fef2f2 !important;">Fecha Salida:</td>
+                  <td rowspan="2" class="p-0 bg-white">
+                    <input type="date" formControlName="fechaSalida" class="form-control form-control-sm border-0 shadow-none px-3 py-4 text-center fw-bold text-danger">
+                  </td>
+                  <td class="bg-light fw-bold small text-uppercase p-3" style="color: #475569;">Email Personal:</td>
+                  <td class="p-0 bg-white">
+                    <input type="email" formControlName="email1" class="form-control form-control-sm border-0 shadow-none px-3 py-3" placeholder="ejemplo@correo.com">
+                  </td>
+                </tr>
 
-        <mat-form-field appearance="outline">
-          <mat-label>Fecha de Ingreso</mat-label>
-          <input matInput formControlName="fechaIngreso" type="date">
-        </mat-form-field>
+                <tr>
+                  <td class="p-0 bg-white">
+                    <div class="d-flex align-items-center px-3 py-2 hover-bg-light">
+                      <span class="small text-uppercase flex-grow-1 fw-semibold" style="font-size: 0.65rem;">Contrato de Trabajo</span>
+                      <input type="radio" value="contrato" formControlName="modalidad" class="form-check-input shadow-none m-0 border-primary">
+                    </div>
+                  </td>
+                  <td class="bg-light fw-bold small text-uppercase p-3" style="color: #475569;">Email Institucional:</td>
+                  <td class="p-0 bg-white">
+                    <input type="email" formControlName="email2" class="form-control form-control-sm border-0 shadow-none px-3 py-3" placeholder="institucional@gob.ec">
+                  </td>
+                </tr>
 
-        <mat-form-field appearance="outline">
-          <mat-label>Fecha de Salida</mat-label>
-          <input matInput formControlName="fechaSalida" type="date">
-        </mat-form-field>
-      </div>
-
-      <div class="form-grid">
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Dirección Domiciliaria</mat-label>
-          <input matInput formControlName="direccion">
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>Número Domicilio</mat-label>
-          <input matInput formControlName="numeroDomicilio">
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>Número Celular</mat-label>
-          <input matInput formControlName="numeroCelular">
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>Contacto de Emergencia</mat-label>
-          <input matInput formControlName="numeroEmergencia">
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>Email Personal 1</mat-label>
-          <input matInput formControlName="email1" type="email">
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>Email Personal 2 (Opcional)</mat-label>
-          <input matInput formControlName="email2" type="email">
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>Provincia</mat-label>
-          <input matInput formControlName="provincia">
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>Cantón</mat-label>
-          <input matInput formControlName="canton">
-        </mat-form-field>
-      </div>
-
-      <br>
-
-      <h2 class="section-title">2. Datos de la Dirección/Unidad</h2>
-      <mat-divider></mat-divider>
-
-      <div class="radio-group-container mt-15">
-        <label>Lugar de Trabajo:</label>
-        <mat-radio-group formControlName="lugarTrabajo" color="primary">
-          <mat-radio-button value="Planta Central">Planta Central</mat-radio-button>
-          <mat-radio-button value="Procesos Desconcentrados">Procesos Desconcentrados</mat-radio-button>
-        </mat-radio-group>
-      </div>
-
-      <div class="form-grid">
-        <mat-form-field appearance="outline">
-          <mat-label>Dirección / Unidad a la que pertenecía</mat-label>
-          <input matInput formControlName="direccionUnidad">
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>Cargo que Desempeñaba</mat-label>
-          <input matInput formControlName="cargo">
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>Grupo Ocupacional</mat-label>
-          <input matInput formControlName="grupoOcupacional">
-        </mat-form-field>
+                <tr>
+                  <td class="bg-light fw-bold small text-uppercase p-3" style="color: #475569;">Dirección Domiciliaria:</td>
+                  <td colspan="3" class="p-0 bg-white">
+                    <input type="text" formControlName="direccion" class="form-control form-control-sm border-0 shadow-none px-3 py-4" placeholder="Calle principal, secundaria y número de casa">
+                  </td>
+                  <td class="bg-light p-0">
+                    <div class="fw-bold small text-uppercase p-2 border-bottom" style="font-size: 0.65rem; color: #475569;">Provincia:</div>
+                    <div class="fw-bold small text-uppercase p-2" style="font-size: 0.65rem; color: #475569;">Cantón:</div>
+                  </td>
+                  <td class="p-0 bg-white">
+                    <div class="border-bottom"><input type="text" formControlName="provincia" class="form-control form-control-sm border-0 shadow-none px-3 py-2 fw-bold"></div>
+                    <div><input type="text" formControlName="canton" class="form-control form-control-sm border-0 shadow-none px-3 py-2 fw-bold"></div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </form>
-
-    <mat-card-actions class="actions-container">
-      <button mat-raised-button color="primary" class="btn-large" (click)="enviarTramite()">
-        <mat-icon>send</mat-icon> Enviar para Aprobación
-      </button>
-    </mat-card-actions>
-  </mat-card>
-
-  <div class="download-section" *ngIf="estadoTramite === 'Completado'">
-    <button mat-raised-button color="accent" class="btn-large" (click)="generarPDF()">
-      <mat-icon>picture_as_pdf</mat-icon> Descargar PDF Completo para FirmaEC
-    </button>
+    
+    <div class="mt-4 text-center">
+        <p class="text-muted small"><i class="fas fa-info-circle me-1"></i> Por favor, verifique que todos los datos personales estén actualizados antes de imprimir el Paz y Salvo.</p>
+    </div>
   </div>
 
 </div>
