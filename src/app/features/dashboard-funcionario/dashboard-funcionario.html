@@ -32,10 +32,10 @@
                 <tr>
                   <td rowspan="4" class="bg-light fw-bold small text-uppercase align-top p-3" style="color: #475569;">Modalidad Laboral:</td>
                   <td class="p-0 bg-white">
-                    <div class="d-flex align-items-center px-3 py-2 border-bottom hover-bg-light">
+                    <label class="d-flex align-items-center px-3 py-2 border-bottom hover-bg-light" style="cursor: pointer;">
                       <span class="small text-uppercase flex-grow-1 fw-semibold" style="font-size: 0.65rem;">Nombramiento Permanente</span>
                       <input type="radio" value="permanente" formControlName="modalidad" class="form-check-input shadow-none m-0 border-primary">
-                    </div>
+                    </label>
                   </td>
                   <td rowspan="2" class="bg-light fw-bold small text-uppercase text-center p-3" style="color: #1e40af; background-color: #eff6ff !important;">Fecha Ingreso:</td>
                   <td rowspan="2" class="p-0 bg-white">
@@ -49,10 +49,10 @@
 
                 <tr>
                   <td class="p-0 bg-white">
-                    <div class="d-flex align-items-center px-3 py-2 border-bottom hover-bg-light">
+                    <label class="d-flex align-items-center px-3 py-2 border-bottom hover-bg-light" style="cursor: pointer;">
                       <span class="small text-uppercase flex-grow-1 fw-semibold" style="font-size: 0.65rem;">Nombramiento Provisional</span>
                       <input type="radio" value="provisional" formControlName="modalidad" class="form-check-input shadow-none m-0 border-primary">
-                    </div>
+                    </label>
                   </td>
                   <td class="bg-light fw-bold small text-uppercase p-3" style="color: #475569;">Contacto Emergencia:</td>
                   <td class="p-0 bg-white">
@@ -62,10 +62,10 @@
 
                 <tr>
                   <td class="p-0 bg-white">
-                    <div class="d-flex align-items-center px-3 py-2 border-bottom hover-bg-light">
+                    <label class="d-flex align-items-center px-3 py-2 border-bottom hover-bg-light" style="cursor: pointer;">
                       <span class="small text-uppercase flex-grow-1 fw-semibold" style="font-size: 0.65rem;">Contrato Ocasional</span>
                       <input type="radio" value="ocasional" formControlName="modalidad" class="form-check-input shadow-none m-0 border-primary">
-                    </div>
+                    </label>
                   </td>
                   <td rowspan="2" class="bg-light fw-bold small text-uppercase text-center p-3" style="color: #b91c1c; background-color: #fef2f2 !important;">Fecha Salida:</td>
                   <td rowspan="2" class="p-0 bg-white">
@@ -79,10 +79,10 @@
 
                 <tr>
                   <td class="p-0 bg-white">
-                    <div class="d-flex align-items-center px-3 py-2 hover-bg-light">
+                    <label class="d-flex align-items-center px-3 py-2 hover-bg-light" style="cursor: pointer;">
                       <span class="small text-uppercase flex-grow-1 fw-semibold" style="font-size: 0.65rem;">Contrato de Trabajo</span>
                       <input type="radio" value="contrato" formControlName="modalidad" class="form-check-input shadow-none m-0 border-primary">
-                    </div>
+                    </label>
                   </td>
                   <td class="bg-light fw-bold small text-uppercase p-3" style="color: #475569;">Email Institucional:</td>
                   <td class="p-0 bg-white">
@@ -111,9 +111,9 @@
       </div>
     </form>
     
-    <div class="mt-4 text-center">
-        <p class="text-muted small"><i class="fas fa-info-circle me-1"></i> Por favor, verifique que todos los datos personales estén actualizados antes de imprimir el Paz y Salvo.</p>
+    <div class="mt-4 text-center pb-5">
+        <button (click)="guardarDatosPersonales()" class="btn btn-primary px-5 shadow fw-bold">Guardar y Validar Datos</button>
+        <p class="text-muted small mt-2"><i class="fas fa-info-circle me-1"></i> Verifique los datos antes de continuar.</p>
     </div>
   </div>
-
 </div>

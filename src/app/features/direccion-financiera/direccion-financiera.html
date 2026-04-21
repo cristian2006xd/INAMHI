@@ -1,6 +1,11 @@
-<div style="display: flex; justify-content: center; align-items: center; min-height: 100vh; width: 100%; background-color: #f4f7f6; padding: 20px;">
+<div id="contenedor-paz-salvo" [formGroup]="adminForm" style="min-height: 100vh; width: 100%; background-color: #f4f7f6; padding: 20px; display: flex; justify-content: center; align-items: flex-start;">
   
   <div class="container" style="max-width: 1100px; margin: 0 auto;">
+    
+    <div class="text-center mb-4">
+        <h4 class="fw-bold text-dark text-uppercase" style="letter-spacing: 1px;">Formulario Oficial de Paz y Salvo - INAMHI</h4>
+    </div>
+
     <div class="card border-0 shadow-lg" style="border-radius: 12px; overflow: hidden;">
       
       <div class="card-header border-0 py-3" style="background: linear-gradient(135deg, #334155 0%, #475569 100%);">
@@ -26,60 +31,81 @@
             </thead>
             
             <tbody class="small">
-              <tr>
+              <tr [class.table-danger]="adminForm.get('administradorContrato')?.invalid && adminForm.get('administradorContrato')?.touched">
                 <td class="text-uppercase p-2 bg-light-subtle" style="font-size: 0.7rem;">¿Es Administrador de Contrato?</td>
-                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none"></td>
-                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none"></td>
+                <td class="text-center p-0">
+                  <input type="checkbox" class="form-check-input" [checked]="adminForm.get('administradorContrato')?.value === true" (change)="toggleCheck('administradorContrato', true)">
+                </td>
+                <td class="text-center p-0">
+                  <input type="checkbox" class="form-check-input" [checked]="adminForm.get('administradorContrato')?.value === false" (change)="toggleCheck('administradorContrato', false)">
+                </td>
                 <td class="text-uppercase p-2 bg-light-subtle" style="font-size: 0.7rem;">¿Realizó la entrega del informe?</td>
-                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none"></td>
-                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none"></td>
+                <td class="text-center p-0">
+                  <input type="checkbox" class="form-check-input" [checked]="adminForm.get('entregaInforme')?.value === true" (change)="toggleCheck('entregaInforme', true)">
+                </td>
+                <td class="text-center p-0">
+                  <input type="checkbox" class="form-check-input" [checked]="adminForm.get('entregaInforme')?.value === false" (change)="toggleCheck('entregaInforme', false)">
+                </td>
                 <td rowspan="4" class="p-0">
-                  <textarea class="form-control border-0 h-100 shadow-none p-3 fw-bold text-center" placeholder="NOMBRE COMPLETO" style="resize: none; min-height: 180px; font-size: 0.75rem;"></textarea>
+                  <textarea formControlName="nombreResponsable" class="form-control border-0 h-100 shadow-none p-3 fw-bold text-center" placeholder="NOMBRE COMPLETO" style="resize: none; min-height: 180px; font-size: 0.75rem;"></textarea>
                 </td>
                 <td rowspan="4" class="bg-white" style="position: relative; border-right: none;">
-                  <div style="position: absolute; bottom: 20px; left: 10%; width: 80%; border-top: 1px solid #cbd5e1;"></div>
+                  <div style="position: absolute; bottom: 30px; left: 10%; width: 80%; border-top: 1px solid #cbd5e1;"></div>
+                  <div class="text-center" style="position: absolute; bottom: 10px; width: 100%; font-size: 0.6rem; color: #94a3b8;">FIRMA DIGITAL / MANUSCRITA</div>
                 </td>
               </tr>
 
-              <tr>
+              <tr [class.table-danger]="adminForm.get('entregaBienes')?.invalid && adminForm.get('entregaBienes')?.touched">
                 <td class="text-uppercase p-2 bg-light-subtle" style="font-size: 0.7rem;">¿Entregó bienes muebles y equipos?</td>
-                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none"></td>
-                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none"></td>
+                <td class="text-center p-0">
+                  <input type="checkbox" class="form-check-input" [checked]="adminForm.get('entregaBienes')?.value === true" (change)="toggleCheck('entregaBienes', true)">
+                </td>
+                <td class="text-center p-0">
+                  <input type="checkbox" class="form-check-input" [checked]="adminForm.get('entregaBienes')?.value === false" (change)="toggleCheck('entregaBienes', false)">
+                </td>
                 <td class="p-0">
                   <div class="d-flex align-items-center h-100">
                     <span class="small text-uppercase px-2 py-2 fw-bold bg-light border-end" style="font-size: 0.6rem; min-width: 110px;">Número de Acta:</span>
-                    <input type="text" class="form-control form-control-sm border-0 flex-grow-1 shadow-none px-2" style="background-color: #f8fafc;">
+                    <input type="text" formControlName="numeroActa" class="form-control form-control-sm border-0 flex-grow-1 shadow-none px-2" style="background-color: #f8fafc;">
                   </div>
                 </td>
                 <td colspan="2" class="bg-light"></td>
               </tr>
 
-              <tr>
+              <tr [class.table-danger]="adminForm.get('pendientesDeducibles')?.invalid && adminForm.get('pendientesDeducibles')?.touched">
                 <td class="text-uppercase p-2 bg-light-subtle" style="font-size: 0.7rem;">¿Tiene valores pendientes por deducibles?</td>
-                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none"></td>
-                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none"></td>
+                <td class="text-center p-0">
+                  <input type="checkbox" class="form-check-input" [checked]="adminForm.get('pendientesDeducibles')?.value === true" (change)="toggleCheck('pendientesDeducibles', true)">
+                </td>
+                <td class="text-center p-0">
+                  <input type="checkbox" class="form-check-input" [checked]="adminForm.get('pendientesDeducibles')?.value === false" (change)="toggleCheck('pendientesDeducibles', false)">
+                </td>
                 <td class="p-0">
                   <div class="d-flex align-items-center h-100">
                     <span class="small text-uppercase px-2 py-2 fw-bold bg-light border-end" style="font-size: 0.6rem; min-width: 110px;">Valor a descontar:</span>
                     <div class="input-group input-group-sm">
                         <span class="input-group-text border-0 bg-transparent text-success fw-bold">$</span>
-                        <input type="number" class="form-control border-0 shadow-none px-1 fw-bold" style="background-color: #f0fdf4;">
+                        <input type="number" formControlName="valorDeducibles" class="form-control border-0 shadow-none px-1 fw-bold" style="background-color: #f0fdf4;">
                     </div>
                   </div>
                 </td>
                 <td colspan="2" class="bg-light"></td>
               </tr>
 
-              <tr>
+              <tr [class.table-danger]="adminForm.get('pasajesJustificar')?.invalid && adminForm.get('pasajesJustificar')?.touched">
                 <td class="text-uppercase p-2 bg-light-subtle" style="font-size: 0.7rem;">¿Tiene pasajes aéreos por justificar?</td>
-                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none"></td>
-                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none"></td>
+                <td class="text-center p-0">
+                  <input type="checkbox" class="form-check-input" [checked]="adminForm.get('pasajesJustificar')?.value === true" (change)="toggleCheck('pasajesJustificar', true)">
+                </td>
+                <td class="text-center p-0">
+                  <input type="checkbox" class="form-check-input" [checked]="adminForm.get('pasajesJustificar')?.value === false" (change)="toggleCheck('pasajesJustificar', false)">
+                </td>
                 <td class="p-0">
                   <div class="d-flex align-items-center h-100">
                     <span class="small text-uppercase px-2 py-2 fw-bold bg-light border-end" style="font-size: 0.6rem; min-width: 110px;">Valor a descontar:</span>
                     <div class="input-group input-group-sm">
                         <span class="input-group-text border-0 bg-transparent text-success fw-bold">$</span>
-                        <input type="number" class="form-control border-0 shadow-none px-1 fw-bold" style="background-color: #f0fdf4;">
+                        <input type="number" formControlName="valorPasajes" class="form-control border-0 shadow-none px-1 fw-bold" style="background-color: #f0fdf4;">
                     </div>
                   </div>
                 </td>
@@ -91,5 +117,14 @@
       </div>
     </div>
   </div>
+</div>
 
+<div class="text-center mt-4 pb-5">
+  <button type="button" (click)="guardarAdministrativo()" class="btn btn-secondary px-4 fw-bold shadow me-3">
+    <i class="fas fa-save me-2"></i>Guardar Gestión Administrativa
+  </button>
+  
+  <button type="button" (click)="imprimirPDF()" class="btn btn-danger px-4 fw-bold shadow">
+    <i class="fas fa-file-pdf me-2"></i>Imprimir y Descargar PDF
+  </button>
 </div>

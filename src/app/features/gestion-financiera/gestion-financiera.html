@@ -1,4 +1,4 @@
-<div style="display: flex; justify-content: center; align-items: center; min-height: 100vh; width: 100%; background-color: #f4f7f6; padding: 20px;">
+<div [formGroup]="financeForm" style="display: flex; justify-content: center; align-items: center; min-height: 100vh; width: 100%; background-color: #f4f7f6; padding: 20px;">
   
   <div class="container" style="max-width: 1100px; margin: 0 auto;">
     <div class="card border-0 shadow-lg" style="border-radius: 12px; overflow: hidden;">
@@ -25,65 +25,81 @@
             </thead>
             
             <tbody class="small">
-              <tr>
+              <tr [class.table-danger]="financeForm.get('saldosContables')?.invalid && financeForm.get('saldosContables')?.touched">
                 <td class="text-uppercase p-2 bg-light-subtle" style="font-size: 0.75rem; line-height: 1.2;">
                   ¿Tiene valores pendientes de pago por saldos contables? 
                   <div class="text-muted fw-normal" style="font-size: 0.65rem;">(Viáticos, Caja Chica, Pasajes Aéreos)</div>
                 </td>
-                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none"></td>
-                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none"></td>
+                <td class="text-center p-0">
+                  <input type="checkbox" class="form-check-input" [checked]="financeForm.get('saldosContables')?.value === true" (change)="toggleCheck('saldosContables', true)">
+                </td>
+                <td class="text-center p-0">
+                  <input type="checkbox" class="form-check-input" [checked]="financeForm.get('saldosContables')?.value === false" (change)="toggleCheck('saldosContables', false)">
+                </td>
                 <td class="p-0">
-                  <div class="input-group input-group-sm">
+                  <div class="input-group input-group-sm h-100">
                     <span class="input-group-text border-0 bg-transparent ps-3" style="color: #059669;">$</span>
-                    <input type="number" class="form-control border-0 shadow-none fw-bold" style="background-color: #ecfdf5;" placeholder="0.00">
+                    <input type="number" formControlName="saldosContablesValor" class="form-control border-0 shadow-none fw-bold" style="background-color: #ecfdf5;">
                   </div>
                 </td>
-                <td class="p-0"><input type="text" class="form-control form-control-sm border-0 h-100 shadow-none px-2" placeholder="Nota..."></td>
+                <td class="p-0"><input type="text" formControlName="saldosContablesObs" class="form-control form-control-sm border-0 h-100 shadow-none px-2" placeholder="Nota..."></td>
                 <td rowspan="4" class="p-0">
-                  <input type="text" class="form-control form-control-sm border-0 h-100 text-center fw-bold shadow-none" placeholder="Nombre completo">
+                  <input type="text" formControlName="nombreResponsable" class="form-control form-control-sm border-0 h-100 text-center fw-bold shadow-none" placeholder="Nombre completo">
                 </td>
                 <td rowspan="4" class="bg-white" style="position: relative;">
                   <div style="position: absolute; bottom: 15px; left: 10%; width: 80%; border-top: 1px solid #cbd5e1;"></div>
                 </td>
               </tr>
 
-              <tr>
+              <tr [class.table-danger]="financeForm.get('anticipoSueldos')?.invalid && financeForm.get('anticipoSueldos')?.touched">
                 <td class="text-uppercase p-2 bg-light-subtle" style="font-size: 0.75rem;">¿Tiene valores pendientes de pago por anticipo de sueldos?</td>
-                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none"></td>
-                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none"></td>
+                <td class="text-center p-0">
+                  <input type="checkbox" class="form-check-input" [checked]="financeForm.get('anticipoSueldos')?.value === true" (change)="toggleCheck('anticipoSueldos', true)">
+                </td>
+                <td class="text-center p-0">
+                  <input type="checkbox" class="form-check-input" [checked]="financeForm.get('anticipoSueldos')?.value === false" (change)="toggleCheck('anticipoSueldos', false)">
+                </td>
                 <td class="p-0">
                   <div class="input-group input-group-sm">
                     <span class="input-group-text border-0 bg-transparent ps-3" style="color: #059669;">$</span>
-                    <input type="number" class="form-control border-0 shadow-none fw-bold" style="background-color: #ecfdf5;" placeholder="0.00">
+                    <input type="number" formControlName="anticipoSueldosValor" class="form-control border-0 shadow-none fw-bold" style="background-color: #ecfdf5;">
                   </div>
                 </td>
-                <td class="p-0"><input type="text" class="form-control form-control-sm border-0 h-100 shadow-none px-2"></td>
+                <td class="p-0"><input type="text" formControlName="anticipoSueldosObs" class="form-control form-control-sm border-0 h-100 shadow-none px-2"></td>
               </tr>
 
-              <tr>
+              <tr [class.table-danger]="financeForm.get('recuperacionValores')?.invalid && financeForm.get('recuperacionValores')?.touched">
                 <td class="text-uppercase p-2 bg-light-subtle" style="font-size: 0.75rem;">¿Tiene valores pendientes de pago por recuperación de valores?</td>
-                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none"></td>
-                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none"></td>
+                <td class="text-center p-0">
+                  <input type="checkbox" class="form-check-input" [checked]="financeForm.get('recuperacionValores')?.value === true" (change)="toggleCheck('recuperacionValores', true)">
+                </td>
+                <td class="text-center p-0">
+                  <input type="checkbox" class="form-check-input" [checked]="financeForm.get('recuperacionValores')?.value === false" (change)="toggleCheck('recuperacionValores', false)">
+                </td>
                 <td class="p-0">
                   <div class="input-group input-group-sm">
                     <span class="input-group-text border-0 bg-transparent ps-3" style="color: #059669;">$</span>
-                    <input type="number" class="form-control border-0 shadow-none fw-bold" style="background-color: #ecfdf5;" placeholder="0.00">
+                    <input type="number" formControlName="recuperacionValoresValor" class="form-control border-0 shadow-none fw-bold" style="background-color: #ecfdf5;">
                   </div>
                 </td>
-                <td class="p-0"><input type="text" class="form-control form-control-sm border-0 h-100 shadow-none px-2"></td>
+                <td class="p-0"><input type="text" formControlName="recuperacionValoresObs" class="form-control form-control-sm border-0 h-100 shadow-none px-2"></td>
               </tr>
 
-              <tr>
+              <tr [class.table-danger]="financeForm.get('devolucionMuebles')?.invalid && financeForm.get('devolucionMuebles')?.touched">
                 <td class="text-uppercase p-2 bg-light-subtle" style="font-size: 0.75rem;">¿Tiene valores pendientes por devolución de muebles y equipos?</td>
-                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none"></td>
-                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none"></td>
+                <td class="text-center p-0">
+                  <input type="checkbox" class="form-check-input" [checked]="financeForm.get('devolucionMuebles')?.value === true" (change)="toggleCheck('devolucionMuebles', true)">
+                </td>
+                <td class="text-center p-0">
+                  <input type="checkbox" class="form-check-input" [checked]="financeForm.get('devolucionMuebles')?.value === false" (change)="toggleCheck('devolucionMuebles', false)">
+                </td>
                 <td class="p-0">
                   <div class="input-group input-group-sm">
                     <span class="input-group-text border-0 bg-transparent ps-3" style="color: #059669;">$</span>
-                    <input type="number" class="form-control border-0 shadow-none fw-bold" style="background-color: #ecfdf5;" placeholder="0.00">
+                    <input type="number" formControlName="devolucionMueblesValor" class="form-control border-0 shadow-none fw-bold" style="background-color: #ecfdf5;">
                   </div>
                 </td>
-                <td class="p-0"><input type="text" class="form-control form-control-sm border-0 h-100 shadow-none px-2"></td>
+                <td class="p-0"><input type="text" formControlName="devolucionMueblesObs" class="form-control form-control-sm border-0 h-100 shadow-none px-2"></td>
               </tr>
 
               <tr>
@@ -96,7 +112,8 @@
               </tr>
               <tr>
                 <td colspan="5" class="p-0 bg-white">
-                  <input type="text" class="form-control form-control-sm border-0 text-center py-3 fw-bold shadow-none" placeholder="NOMBRE DE LA AUTORIDAD">
+                  <input type="text" formControlName="nombreDirector" class="form-control form-control-sm border-0 text-center py-3 fw-bold shadow-none" placeholder="NOMBRE DE LA AUTORIDAD"
+                         [class.is-invalid]="financeForm.get('nombreDirector')?.invalid && financeForm.get('nombreDirector')?.touched">
                 </td>
                 <td colspan="2" class="p-0 bg-white" style="height: 60px; vertical-align: bottom;">
                    <div class="mx-auto mb-2" style="width: 70%; border-top: 1px solid #cbd5e1;"></div>
@@ -106,6 +123,10 @@
           </table>
         </div>
       </div>
+    </div>
+
+    <div class="mt-4 text-center">
+      <button (click)="guardarFinanciero()" class="btn btn-primary px-5 shadow fw-bold">Validar Gestión Financiera</button>
     </div>
   </div>
 

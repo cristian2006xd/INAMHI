@@ -1,50 +1,42 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common'; // Agregado para mejores prácticas
+import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-
-// RUTA CORREGIDA: Subimos dos niveles hasta llegar a core
-import { FormStatusService } from '../../core/services/form-status'; 
 
 @Component({
   selector: 'app-datos-personales',
   standalone: true,
-  imports: [
-    CommonModule, 
-    ReactiveFormsModule
-  ],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './dashboard-funcionario.html',
-  styleUrls: ['./dashboard-funcionario.scss'] // Asegúrate de tener este archivo o bórralo si no existe
 })
-export class DatosPersonales implements OnInit {
+export class DatosPersonalesComponent implements OnInit {
   datosPersonalesForm!: FormGroup;
 
-  constructor(
-    private fb: FormBuilder,
-    private formStatusService: FormStatusService
-  ) {}
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    // Inicialización del formulario
     this.datosPersonalesForm = this.fb.group({
-      nombreCompleto: ['', Validators.required],
-      cedula: ['', [Validators.required, Validators.minLength(10)]],
+      nombreCompleto: ['', [Validators.required]],
+      cedula: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
       telefonoFijo: [''],
-      modalidad: ['', Validators.required],
+      modalidad: ['permanente'], // Valor por defecto para los radio buttons
       fechaIngreso: ['', Validators.required],
-      celular: ['', Validators.required],
+      celular: ['', [Validators.required]],
       contactoEmergencia: ['', Validators.required],
-      fechaSalida: [''],
+      fechaSalida: ['', Validators.required],
       email1: ['', [Validators.required, Validators.email]],
-      email2: ['', Validators.email],
+      email2: ['', [Validators.email]],
       direccion: ['', Validators.required],
-      provincia: ['', Validators.required],
-      canton: ['', Validators.required]
+      provincia: ['PICHINCHA', Validators.required],
+      canton: ['QUITO', Validators.required]
     });
+  }
 
-    // Escuchar cambios para actualizar el color en el Navbar
-    this.datosPersonalesForm.statusChanges.subscribe(status => {
-      // Si el formulario es válido (verde), si no (rojo)
-      this.formStatusService.actualizarEstado('personales', status === 'VALID');
-    });
+  guardarDatosPersonales() {
+    if (this.datosPersonalesForm.valid) {
+      console.log('Datos Personales Capturados:', this.datosPersonalesForm.value);
+    } else {
+      this.datosPersonalesForm.markAllAsTouched();
+      alert('Por favor, complete los campos obligatorios marcados en el formulario.');
+    }
   }
 }

@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DatosDireccion } from './datos-direccion';
+import { DatosDireccionComponent } from './datos-direccion';
 
-describe('DatosDireccion', () => {
-  let component: DatosDireccion;
-  let fixture: ComponentFixture<DatosDireccion>;
+describe('DatosDireccionComponent', () => {
+  let component: DatosDireccionComponent;
+  let fixture: ComponentFixture<DatosDireccionComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DatosDireccion],
+      imports: [DatosDireccionComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(DatosDireccion);
+    fixture = TestBed.createComponent(DatosDireccionComponent);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

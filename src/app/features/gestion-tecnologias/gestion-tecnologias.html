@@ -1,6 +1,6 @@
-<div style="display: flex; justify-content: center; align-items: center; min-height: 100vh; width: 100%; background-color: #f4f7f6; padding: 20px;">
+<div [formGroup]="ticForm" style="display: flex; justify-content: center; align-items: center; min-height: 100vh; width: 100%; background-color: #f4f7f6; padding: 20px;">
   
-  <div class="container" style="max-width: 1150px; margin: 0 auto;" [formGroup]="ticForm">
+  <div class="container" style="max-width: 1150px; margin: 0 auto;">
     <div class="card border-0 shadow-lg" style="border-radius: 12px; overflow: hidden;">
       
       <div class="card-header border-0 py-3" style="background: linear-gradient(135deg, #0f172a 0%, #334155 100%);">
@@ -26,10 +26,18 @@
             </thead>
             
             <tbody class="small">
-              <tr>
+              <tr [class.table-danger]="ticForm.get('verificacionEquipo')?.invalid && ticForm.get('verificacionEquipo')?.touched">
                 <td class="text-uppercase p-2 bg-light-subtle" style="font-size: 0.75rem;">¿Se realizó la verificación del equipo informático?</td>
-                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none" formControlName="verificacionEquipo"></td>
-                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none"></td>
+                <td class="text-center p-0">
+                  <input type="checkbox" class="form-check-input shadow-none" 
+                         [checked]="ticForm.get('verificacionEquipo')?.value === true" 
+                         (change)="toggleTic('verificacionEquipo', true)">
+                </td>
+                <td class="text-center p-0">
+                  <input type="checkbox" class="form-check-input shadow-none" 
+                         [checked]="ticForm.get('verificacionEquipo')?.value === false" 
+                         (change)="toggleTic('verificacionEquipo', false)">
+                </td>
                 <td colspan="3" class="p-0">
                   <div class="d-flex align-items-center h-100">
                     <span class="small text-uppercase px-2 py-2 fw-bold bg-light border-end" style="font-size: 0.65rem; min-width: 100px;">Observación:</span>
@@ -37,31 +45,49 @@
                   </div>
                 </td>
                 <td rowspan="2" class="p-0">
-                  <input type="text" class="form-control form-control-sm border-0 h-100 text-center fw-bold shadow-none" placeholder="NOMBRE..." formControlName="responsableNombre" style="background-color: #fff;">
+                  <input type="text" class="form-control form-control-sm border-0 h-100 text-center fw-bold shadow-none" 
+                         placeholder="NOMBRE RESPONSABLE" formControlName="responsableNombre" 
+                         [class.is-invalid]="ticForm.get('responsableNombre')?.invalid && ticForm.get('responsableNombre')?.touched">
                 </td>
                 <td rowspan="2" class="bg-white" style="position: relative;">
                   <div style="position: absolute; bottom: 10px; left: 10%; width: 80%; border-top: 1px solid #cbd5e1;"></div>
                 </td>
               </tr>
 
-              <tr>
+              <tr [class.table-danger]="(ticForm.get('accesoIp')?.invalid && ticForm.get('accesoIp')?.touched) || (ticForm.get('liberacionIp')?.invalid && ticForm.get('liberacionIp')?.touched)">
                 <td class="text-uppercase p-2 bg-light-subtle" style="font-size: 0.75rem;">¿Tiene acceso a IP fija WI-FI y/o móvil?</td>
-                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none" formControlName="accesoIp"></td>
-                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none"></td>
+                <td class="text-center p-0">
+                  <input type="checkbox" class="form-check-input shadow-none" [checked]="ticForm.get('accesoIp')?.value === true" (change)="toggleTic('accesoIp', true)">
+                </td>
+                <td class="text-center p-0">
+                  <input type="checkbox" class="form-check-input shadow-none" [checked]="ticForm.get('accesoIp')?.value === false" (change)="toggleTic('accesoIp', false)">
+                </td>
                 <td class="text-uppercase p-2 text-center text-muted" style="font-size: 0.7rem;">¿Se realizó la liberación?</td>
-                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none" formControlName="liberacionIp"></td>
-                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none"></td>
+                <td class="text-center p-0">
+                  <input type="checkbox" class="form-check-input shadow-none" [checked]="ticForm.get('liberacionIp')?.value === true" (change)="toggleTic('liberacionIp', true)">
+                </td>
+                <td class="text-center p-0">
+                  <input type="checkbox" class="form-check-input shadow-none" [checked]="ticForm.get('liberacionIp')?.value === false" (change)="toggleTic('liberacionIp', false)">
+                </td>
               </tr>
 
-              <tr>
+              <tr [class.table-danger]="(ticForm.get('retiroContrasenas')?.invalid && ticForm.get('retiroContrasenas')?.touched) || (ticForm.get('entregaBackup')?.invalid && ticForm.get('entregaBackup')?.touched)">
                 <td class="text-uppercase p-2 bg-light-subtle" style="font-size: 0.75rem;">Retiro de control de acceso (Contraseñas)</td>
-                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none" formControlName="retiroContrasenas"></td>
-                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none"></td>
+                <td class="text-center p-0">
+                  <input type="checkbox" class="form-check-input shadow-none" [checked]="ticForm.get('retiroContrasenas')?.value === true" (change)="toggleTic('retiroContrasenas', true)">
+                </td>
+                <td class="text-center p-0">
+                  <input type="checkbox" class="form-check-input shadow-none" [checked]="ticForm.get('retiroContrasenas')?.value === false" (change)="toggleTic('retiroContrasenas', false)">
+                </td>
                 <td class="text-uppercase p-2 bg-light-subtle" style="font-size: 0.75rem;">Entrega del backup de la información</td>
-                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none" formControlName="entregaBackup"></td>
-                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none"></td>
+                <td class="text-center p-0">
+                  <input type="checkbox" class="form-check-input shadow-none" [checked]="ticForm.get('entregaBackup')?.value === true" (change)="toggleTic('entregaBackup', true)">
+                </td>
+                <td class="text-center p-0">
+                  <input type="checkbox" class="form-check-input shadow-none" [checked]="ticForm.get('entregaBackup')?.value === false" (change)="toggleTic('entregaBackup', false)">
+                </td>
                 <td rowspan="3" class="p-0">
-                  <input type="text" class="form-control form-control-sm border-0 h-100 text-center fw-bold shadow-none" placeholder="NOMBRE..." style="background-color: #fff;">
+                  <div class="h-100 d-flex align-items-center justify-content-center fw-bold text-muted small px-2">RESPONSABLE TÉCNICO</div>
                 </td>
                 <td rowspan="3" class="bg-white" style="position: relative;">
                   <div style="position: absolute; bottom: 10px; left: 10%; width: 80%; border-top: 1px solid #cbd5e1;"></div>
@@ -72,32 +98,41 @@
                 <td rowspan="2" class="text-uppercase p-3 text-center fw-bold bg-light" style="font-size: 0.75rem; color: #1e293b;">
                   ¿Se realizó el cierre de las cuentas?
                 </td>
-                <td colspan="2" class="p-0 bg-white">
+                <td colspan="2" class="p-0 bg-white" [class.bg-danger-subtle]="ticForm.get('cierreCuentas')?.invalid && ticForm.get('cierreCuentas')?.touched">
                   <div class="border-bottom py-1 small text-center fw-bold text-muted" style="font-size: 0.6rem;">SI / NO</div>
-                  <div class="text-center py-2"><input type="checkbox" class="form-check-input shadow-none border-primary" formControlName="cierreCuentas"></div>
+                  <div class="text-center py-2">
+                    <input type="checkbox" class="form-check-input shadow-none border-primary" 
+                           [checked]="ticForm.get('cierreCuentas')?.value === true" 
+                           (change)="toggleTic('cierreCuentas', true)">
+                  </div>
                 </td>
                 <td colspan="3" class="p-0">
-                  <div class="d-flex border-bottom align-items-center">
+                  <div class="d-flex border-bottom align-items-center" [class.table-danger]="ticForm.get('correoInstitucional')?.invalid && ticForm.get('correoInstitucional')?.touched">
                     <span class="small text-uppercase px-2 py-1 flex-grow-1" style="font-size: 0.65rem;">Correo Institucional</span>
-                    <div class="border-start px-3 py-1"><input type="checkbox" class="form-check-input shadow-none" formControlName="correoInstitucional"></div>
+                    <div class="border-start px-3 py-1"><input type="checkbox" class="form-check-input" [checked]="ticForm.get('correoInstitucional')?.value === true" (change)="toggleTic('correoInstitucional', true)"></div>
                   </div>
-                  <div class="d-flex border-bottom align-items-center">
+                  <div class="d-flex border-bottom align-items-center" [class.table-danger]="ticForm.get('quipux')?.invalid && ticForm.get('quipux')?.touched">
                     <span class="small text-uppercase px-2 py-1 flex-grow-1" style="font-size: 0.65rem;">QUIPUX</span>
-                    <div class="border-start px-3 py-1"><input type="checkbox" class="form-check-input shadow-none" formControlName="quipux"></div>
+                    <div class="border-start px-3 py-1"><input type="checkbox" class="form-check-input" [checked]="ticForm.get('quipux')?.value === true" (change)="toggleTic('quipux', true)"></div>
                   </div>
-                  <div class="d-flex align-items-center">
+                  <div class="d-flex align-items-center" [class.table-danger]="ticForm.get('esigef')?.invalid && ticForm.get('esigef')?.touched">
                     <span class="small text-uppercase px-2 py-1 flex-grow-1" style="font-size: 0.65rem;">eSIGEF / SPRYN / eSByE</span>
-                    <div class="border-start px-3 py-1"><input type="checkbox" class="form-check-input shadow-none" formControlName="esigef"></div>
+                    <div class="border-start px-3 py-1"><input type="checkbox" class="form-check-input" [checked]="ticForm.get('esigef')?.value === true" (change)="toggleTic('esigef', true)"></div>
                   </div>
                 </td>
               </tr>
 
               <tr>
-                <td class="text-center p-0 bg-white"><input type="checkbox" class="form-check-input shadow-none"></td>
-                <td class="text-center p-0 bg-white"><input type="checkbox" class="form-check-input shadow-none"></td>
+                <td class="text-center p-0 bg-white">
+                    <div class="py-1 small text-center fw-bold text-muted" style="font-size: 0.6rem;">SI</div>
+                    <input type="checkbox" class="form-check-input shadow-none" [checked]="ticForm.get('tarjetaAcceso')?.value === true" (change)="toggleTic('tarjetaAcceso', true)">
+                </td>
+                <td class="text-center p-0 bg-white">
+                    <div class="py-1 small text-center fw-bold text-muted" style="font-size: 0.6rem;">NO</div>
+                    <input type="checkbox" class="form-check-input shadow-none" [checked]="ticForm.get('tarjetaAcceso')?.value === false" (change)="toggleTic('tarjetaAcceso', false)">
+                </td>
                 <td colspan="3" class="small text-uppercase p-2 bg-light-subtle fw-bold" style="font-size: 0.7rem;">
                   ¿Se realizó la entrega y desactivación de la tarjeta de acceso?
-                  <input type="checkbox" class="form-check-input ms-3 shadow-none border-primary" formControlName="tarjetaAcceso">
                 </td>
               </tr>
             </tbody>
@@ -105,6 +140,12 @@
         </div>
       </div>
     </div>
-  </div>
 
+    <div class="text-center mt-4 pb-5">
+        <button type="button" (click)="validarTic()" class="btn btn-dark px-5 shadow-lg fw-bold" style="border-radius: 8px; letter-spacing: 1px;">
+            <i class="fas fa-save me-2"></i>GUARDAR CERTIFICACIÓN TIC
+        </button>
+    </div>
+
+  </div>
 </div>

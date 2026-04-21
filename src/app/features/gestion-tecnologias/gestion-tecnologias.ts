@@ -1,41 +1,56 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { FormStatusService } from '../../core/services/form-status';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-gestion-tecnologias',
+  selector: 'app-tic-paz-salvo',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './gestion-tecnologias.html'
+  templateUrl: './gestion-tecnologias.html',
+  styleUrls: ['./gestion-tecnologias.scss']
 })
 export class GestionTecnologiasComponent implements OnInit {
   ticForm!: FormGroup;
 
-  constructor(
-    private fb: FormBuilder,
-    private formStatusService: FormStatusService
-  ) {}
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.ticForm = this.fb.group({
-      verificacionEquipo: [false],
+      // Checkboxes principales (Booleanos)
+      verificacionEquipo: [null, Validators.required],
+      accesoIp: [null, Validators.required],
+      liberacionIp: [null, Validators.required],
+      retiroContrasenas: [null, Validators.required],
+      entregaBackup: [null, Validators.required],
+      cierreCuentas: [null, Validators.required],
+      correoInstitucional: [null, Validators.required],
+      quipux: [null, Validators.required],
+      esigef: [null, Validators.required],
+      tarjetaAcceso: [null, Validators.required],
+      
+      // Campos de texto
       observacionEquipo: [''],
-      accesoIp: [false],
-      liberacionIp: [false],
-      retiroContrasenas: [false],
-      entregaBackup: [false],
-      cierreCuentas: [false],
-      correoInstitucional: [false],
-      quipux: [false],
-      esigef: [false],
-      responsableNombre: [''],
-      tarjetaAcceso: [false]
+      responsableNombre: ['', Validators.required]
     });
+  }
 
-    // Notificar al Navbar si esta sección está lista
-    this.ticForm.statusChanges.subscribe(status => {
-      this.formStatusService.actualizarEstado('tic', status === 'VALID');
-    });
+  // Método para manejar la lógica de SI/NO con checkboxes
+  toggleTic(controlName: string, value: boolean) {
+    const control = this.ticForm.get(controlName);
+    if (control) {
+      // Si hace click en el mismo que ya está activo, lo pone en null (desmarcado)
+      const newValue = control.value === value ? null : value;
+      control.setValue(newValue);
+    }
+  }
+
+  validarTic() {
+    if (this.ticForm.valid) {
+      console.log('Formulario TIC válido:', this.ticForm.value);
+      alert('Sección TIC validada con éxito.');
+    } else {
+      this.ticForm.markAllAsTouched();
+      alert('Error: Asegúrate de marcar todas las verificaciones de TIC.');
+    }
   }
 }

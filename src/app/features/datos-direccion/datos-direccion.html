@@ -1,4 +1,4 @@
-<div style="display: flex; justify-content: center; align-items: center; min-height: 100vh; width: 100%; background-color: #f4f7f6; padding: 20px;">
+<div [formGroup]="unidadForm" style="display: flex; justify-content: center; align-items: center; min-height: 100vh; width: 100%; background-color: #f4f7f6; padding: 20px;">
   
   <div class="container" style="max-width: 1150px; margin: 0 auto;">
     <div class="card border-0 shadow-lg" style="border-radius: 12px; overflow: hidden;">
@@ -18,28 +18,28 @@
                 <td class="p-0" style="width: 25%;">
                   <div class="d-flex justify-content-between align-items-center p-2 border-bottom hover-bg-light">
                     <span class="small text-uppercase fw-semibold" style="font-size: 0.65rem;">Planta Central</span>
-                    <input type="checkbox" class="form-check-input shadow-none m-0 border-primary">
+                    <input type="checkbox" formControlName="plantaCentral" class="form-check-input shadow-none m-0 border-primary">
                   </div>
                   <div class="d-flex justify-content-between align-items-center p-2">
                     <span class="small text-uppercase fw-semibold" style="font-size: 0.65rem;">Procesos Desconcentrados</span>
-                    <input type="checkbox" class="form-check-input shadow-none m-0 border-primary">
+                    <input type="checkbox" formControlName="procesosDesconcentrados" class="form-check-input shadow-none m-0 border-primary">
                   </div>
                 </td>
                 <td class="bg-light fw-bold small text-uppercase p-2" style="width: 15%; color: #475569;">Dirección / Unidad:</td>
                 <td colspan="4" class="p-0">
-                  <input type="text" class="form-control form-control-sm border-0 h-100 shadow-none px-3 py-3 fw-bold" placeholder="Escriba la unidad técnica aquí...">
+                  <input type="text" formControlName="direccionUnidad" class="form-control form-control-sm border-0 h-100 shadow-none px-3 py-3 fw-bold" placeholder="Escriba la unidad técnica aquí...">
                 </td>
               </tr>
               <tr>
                 <td class="p-0 bg-white">
                   <div class="d-flex align-items-center px-2 py-2">
                     <span class="small text-uppercase fw-bold text-muted me-2" style="font-size: 0.6rem;">Detalle:</span>
-                    <input type="text" class="form-control form-control-sm border-0 border-bottom rounded-0 p-0 shadow-none">
+                    <input type="text" formControlName="detalleLugar" class="form-control form-control-sm border-0 border-bottom rounded-0 p-0 shadow-none">
                   </div>
                 </td>
                 <td class="bg-light fw-bold small text-uppercase p-2" style="color: #475569;">Cargo / Grupo:</td>
                 <td colspan="4" class="p-0">
-                  <input type="text" class="form-control form-control-sm border-0 h-100 shadow-none px-3" placeholder="Cargo u ocupación">
+                  <input type="text" formControlName="cargoGrupo" class="form-control form-control-sm border-0 h-100 shadow-none px-3" placeholder="Cargo u ocupación">
                 </td>
               </tr>
 
@@ -55,54 +55,54 @@
 
               <tr>
                 <td class="small text-uppercase p-2 lh-sm" style="font-size: 0.7rem;">Entrega informe de fin de gestión con detalle de actividades ejecutadas y pendientes</td>
-                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none"></td>
-                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none"></td>
+                <td class="text-center p-0"><input type="checkbox" [checked]="unidadForm.get('entregaInforme')?.value === true" (change)="toggleCheck('entregaInforme', true)" class="form-check-input"></td>
+                <td class="text-center p-0"><input type="checkbox" [checked]="unidadForm.get('entregaInforme')?.value === false" (change)="toggleCheck('entregaInforme', false)" class="form-check-input"></td>
                 <td class="small text-uppercase p-2 lh-sm" style="font-size: 0.7rem;">Entrega los trámites asignados en el Sistema Quipux (Bandeja en cero)</td>
-                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none"></td>
-                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none"></td>
+                <td class="text-center p-0"><input type="checkbox" [checked]="unidadForm.get('entregaQuipux')?.value === true" (change)="toggleCheck('entregaQuipux', true)" class="form-check-input"></td>
+                <td class="text-center p-0"><input type="checkbox" [checked]="unidadForm.get('entregaQuipux')?.value === false" (change)="toggleCheck('entregaQuipux', false)" class="form-check-input"></td>
                 <td rowspan="3" class="p-0 bg-white" style="position: relative;">
-                  <textarea class="form-control border-0 h-100 shadow-none text-center small pt-4" placeholder="Nombre y Apellido" style="resize: none;"></textarea>
+                  <textarea formControlName="responsableFirma" class="form-control border-0 h-100 shadow-none text-center small pt-4" placeholder="Nombre y Apellido" style="resize: none;"></textarea>
                   <div style="position: absolute; bottom: 15px; left: 10%; width: 80%; border-top: 1px solid #cbd5e1;"></div>
                 </td>
               </tr>
 
               <tr>
                 <td class="small text-uppercase p-2 lh-sm" style="font-size: 0.7rem;">Fe de presentación de la entrega en recepción de documentos del informe</td>
-                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none"></td>
-                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none"></td>
+                <td class="text-center p-0"><input type="checkbox" [checked]="unidadForm.get('fePresentacion')?.value === true" (change)="toggleCheck('fePresentacion', true)" class="form-check-input"></td>
+                <td class="text-center p-0"><input type="checkbox" [checked]="unidadForm.get('fePresentacion')?.value === false" (change)="toggleCheck('fePresentacion', false)" class="form-check-input"></td>
                 <td class="small text-uppercase p-2 lh-sm" style="font-size: 0.7rem;">Tiene asignado claves de acceso en su unidad</td>
-                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none"></td>
-                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none"></td>
+                <td class="text-center p-0"><input type="checkbox" [checked]="unidadForm.get('clavesAcceso')?.value === true" (change)="toggleCheck('clavesAcceso', true)" class="form-check-input"></td>
+                <td class="text-center p-0"><input type="checkbox" [checked]="unidadForm.get('clavesAcceso')?.value === false" (change)="toggleCheck('clavesAcceso', false)" class="form-check-input"></td>
               </tr>
 
               <tr>
                 <td class="small text-uppercase p-2 lh-sm" style="font-size: 0.7rem;">Realiza la entrega de archivo de la documentación física y digital (LOSEP)</td>
-                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none"></td>
-                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none"></td>
+                <td class="text-center p-0"><input type="checkbox" [checked]="unidadForm.get('entregaArchivo')?.value === true" (change)="toggleCheck('entregaArchivo', true)" class="form-check-input"></td>
+                <td class="text-center p-0"><input type="checkbox" [checked]="unidadForm.get('entregaArchivo')?.value === false" (change)="toggleCheck('entregaArchivo', false)" class="form-check-input"></td>
                 <td class="small text-uppercase p-2 lh-sm" style="font-size: 0.7rem;">Realizó acta entrega de claves de su unidad</td>
-                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none"></td>
-                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none"></td>
+                <td class="text-center p-0"><input type="checkbox" [checked]="unidadForm.get('actaClaves')?.value === true" (change)="toggleCheck('actaClaves', true)" class="form-check-input"></td>
+                <td class="text-center p-0"><input type="checkbox" [checked]="unidadForm.get('actaClaves')?.value === false" (change)="toggleCheck('actaClaves', false)" class="form-check-input"></td>
               </tr>
 
               <tr>
                 <td class="bg-light fw-bold small text-uppercase p-2" style="font-size: 0.7rem;">¿Es Administrador de Contrato?</td>
-                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none"></td>
-                <td class="text-center p-0"><input type="checkbox" class="form-check-input shadow-none"></td>
+                <td class="text-center p-0"><input type="checkbox" [checked]="unidadForm.get('esAdministrador')?.value === true" (change)="toggleCheck('esAdministrador', true)" class="form-check-input"></td>
+                <td class="text-center p-0"><input type="checkbox" [checked]="unidadForm.get('esAdministrador')?.value === false" (change)="toggleCheck('esAdministrador', false)" class="form-check-input"></td>
                 <td colspan="4" class="p-2 bg-white">
                   <div class="fw-bold small text-uppercase text-muted mb-1" style="font-size: 0.6rem;">Observaciones:</div>
-                  <input type="text" class="form-control form-control-sm border-0 border-bottom rounded-0 p-0 shadow-none">
+                  <input type="text" formControlName="observaciones" class="form-control form-control-sm border-0 border-bottom rounded-0 p-0 shadow-none">
                 </td>
               </tr>
 
               <tr>
                 <td class="bg-light fw-bold small text-uppercase p-2" style="font-size: 0.65rem;">Descripción del Contrato:</td>
-                <td colspan="2" class="p-0"><input type="text" class="form-control form-control-sm border-0 shadow-none px-2"></td>
+                <td colspan="2" class="p-0"><input type="text" formControlName="descripcionContrato" class="form-control form-control-sm border-0 shadow-none px-2"></td>
                 <td colspan="2" class="bg-light fw-bold small text-uppercase p-2" style="font-size: 0.65rem;">Servidor recibe trámites:</td>
-                <td colspan="2" class="p-0"><input type="text" class="form-control form-control-sm border-0 shadow-none px-2" placeholder="Nombre y Cargo"></td>
+                <td colspan="2" class="p-0"><input type="text" formControlName="servidorRecibe" class="form-control form-control-sm border-0 shadow-none px-2" placeholder="Nombre y Cargo"></td>
               </tr>
               <tr>
                 <td class="bg-light fw-bold small text-uppercase p-2" style="font-size: 0.65rem;">Jefe Inmediato (Nombre/Cargo):</td>
-                <td colspan="2" class="p-0"><input type="text" class="form-control form-control-sm border-0 shadow-none px-2 fw-bold"></td>
+                <td colspan="2" class="p-0"><input type="text" formControlName="jefeInmediato" class="form-control form-control-sm border-0 shadow-none px-2 fw-bold"></td>
                 <td colspan="2" class="bg-light fw-bold small text-uppercase p-2 text-center" style="font-size: 0.65rem;">Firma:</td>
                 <td colspan="2" class="bg-white" style="height: 60px; vertical-align: bottom; position: relative;">
                    <div style="position: absolute; bottom: 10px; left: 10%; width: 80%; border-top: 1px solid #cbd5e1;"></div>
@@ -113,6 +113,9 @@
         </div>
       </div>
     </div>
+    
+    <div class="text-center mt-3 pb-5">
+      <button (click)="guardarDireccion()" class="btn btn-dark px-5 fw-bold shadow">Finalizar Sección Unidad</button>
+    </div>
   </div>
-
 </div>

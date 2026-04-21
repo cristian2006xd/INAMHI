@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet, RouterLink, RouterLinkActive, Router } from '@angular/router';
+// IMPORTANTE: Añade estos dos para que funcionen las validaciones
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 // Angular Material
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -19,6 +21,10 @@ import { FormStatusService } from './core/services/form-status';
     RouterOutlet,
     RouterLink,
     RouterLinkActive,
+    // Se agregan aquí para que cualquier componente hijo o el propio root 
+    // pueda usar [formGroup] y validaciones
+    ReactiveFormsModule, 
+    FormsModule,
     MatToolbarModule,
     MatButtonModule,
     MatIconModule
@@ -27,10 +33,10 @@ import { FormStatusService } from './core/services/form-status';
   styleUrls: ['./app.scss']
 })
 export class AppComponent {
-  // CRÍTICO: Inyecta 'formStatus' como public para que el HTML lo reconozca
+  
   constructor(
     public authService: AuthService,
-    public formStatus: FormStatusService, // <--- ESTO BORRA EL ERROR EN APP.HTML
+    public formStatus: FormStatusService,
     private router: Router
   ) {}
 

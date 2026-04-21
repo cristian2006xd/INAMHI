@@ -12,7 +12,7 @@ export const routes: Routes = [
   },
   {
     path: 'datos-personales',
-    loadComponent: () => import('./features/dashboard-funcionario/dashboard-funcionario').then(m => m.DatosPersonales)
+    loadComponent: () => import('./features/dashboard-funcionario/dashboard-funcionario').then(m => m.DatosPersonalesComponent)
   },
   {
     path: 'gestion-tecnologias',
@@ -20,29 +20,29 @@ export const routes: Routes = [
   },
   {
     path: 'gestion-financiera',
-    loadComponent: () => import('./features/gestion-financiera/gestion-financiera').then(m => m.GestionFinanciera)
+    loadComponent: () => import('./features/gestion-financiera/gestion-financiera').then(m => m.GestionFinancieraComponent)
   },
   {
     path: 'seguridad-informacion',
-    loadComponent: () => import('./features/seguridad-informacion/seguridad-informacion').then(m => m.SeguridadInformacion)
+    loadComponent: () => import('./features/seguridad-informacion/seguridad-informacion').then(m => m.PazYSalvoComponent)
   },
   {
     path: 'recursos-humanos',
-    loadComponent: () => import('./features/recursos-humanos/recursos-humanos').then(m => m.RecursosHumanos)
+    loadComponent: () => import('./features/recursos-humanos/recursos-humanos').then(m => m.RecursosHumanosComponent)
   },
   {
     path: 'recepcion-documentos',
-    loadComponent: () => import('./features/recepcion-documentos/recepcion-documentos').then(m => m.RecepcionDocumentos)
+    loadComponent: () => import('./features/recepcion-documentos/recepcion-documentos').then(m => m.RecepcionDocumentosComponent)
   },
   {
     path: 'datos-direccion',
-    loadComponent: () => import('./features/datos-direccion/datos-direccion').then(m => m.DatosDireccion)
+    loadComponent: () => import('./features/datos-direccion/datos-direccion').then(m => m.DatosDireccionComponent)
   },
   {
-  path: 'direccion-financiera',
-  loadComponent: () => import('./features/direccion-financiera/direccion-financiera').then(m => m.DireccionFinanciera)
- },
-   {
+    path: 'direccion-financiera',
+    loadComponent: () => import('./features/direccion-financiera/direccion-financiera').then(m => m.DireccionFinancieraComponent)
+  },
+  {
     path: '**',
     redirectTo: 'login' // Si escriben cualquier cosa mal, al login
   }
