@@ -1,92 +1,111 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-
-// Importación compatible con Angular 17+
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 
 @Component({
-  selector: 'app-gestion-administrativa',
+  selector: 'app-direccion-financiera',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './direccion-financiera.html',
+  templateUrl: './direccion-financiera.html'
 })
-export class DireccionFinancieraComponent implements OnInit {
+export class DireccionFinancieraComponent implements OnInit, AfterViewInit {
   adminForm!: FormGroup;
+  
+  @ViewChild('canvasFirma') canvasRef!: ElementRef<HTMLCanvasElement>;
+  private ctx!: CanvasRenderingContext2D;
+  private isDrawing = false;
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.adminForm = this.fb.group({
       administradorContrato: [null, Validators.required],
-      entregaInforme: [null], 
+      entregaInforme: [null],
       entregaBienes: [null, Validators.required],
       numeroActa: [''],
       pendientesDeducibles: [null, Validators.required],
-      valorDeducibles: [0, [Validators.min(0)]],
+      valorDeducibles: [0],
       pasajesJustificar: [null, Validators.required],
-      valorPasajes: [0, [Validators.min(0)]],
+      valorPasajes: [0],
       nombreResponsable: ['', Validators.required]
     });
   }
 
-  toggleCheck(controlName: string, value: boolean) {
-    const control = this.adminForm.get(controlName);
-    if (control) {
-      control.setValue(control.value === value ? null : value);
-    }
+  ngAfterViewInit() {
+    this.prepararCanvas();
   }
 
-  // --- MÉTODO DE IMPRESIÓN REFORZADO ---
-  public imprimirPDF() {
-    console.log('Intentando generar PDF...');
-    
-    // Capturamos el elemento por ID
-    const data = document.getElementById('contenedor-paz-salvo'); 
-    
-    if (!data) {
-      alert('¡Error! No se encontró el contenedor con id "contenedor-paz-salvo". Revisa tu HTML.');
-      return;
-    }
+  private prepararCanvas() {
+    const canvas = this.canvasRef.nativeElement;
+    this.ctx = canvas.getContext('2d')!;
+    // Ajuste de resolución
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+    // Estilo del trazo
+    this.ctx.strokeStyle = '#000000';
+    this.ctx.lineWidth = 2;
+    this.ctx.lineCap = 'round';
+  }
 
-    alert('Iniciando captura de pantalla... por favor espera un segundo.');
+  // Lógica de dibujo (Mouse)
+  startDrawing(event: MouseEvent) {
+    this.isDrawing = true;
+    this.draw(event);
+  }
 
-    html2canvas(data, { 
-      scale: 3, // Aumentamos a 3 para que se vea súper nítido
-      useCORS: true,
-      backgroundColor: '#f4f7f6',
-      scrollY: -window.scrollY // Corrige problemas de posición si hay scroll
-    }).then(canvas => {
-      alert('Imagen capturada, generando archivo PDF...');
+  draw(event: MouseEvent) {
+    if (!this.isDrawing) return;
+    const rect = this.canvasRef.nativeElement.getBoundingClientRect();
+    this.ctx.lineTo(event.clientX - rect.left, event.clientY - rect.top);
+    this.ctx.stroke();
+    this.ctx.beginPath();
+    this.ctx.moveTo(event.clientX - rect.left, event.clientY - rect.top);
+  }
 
+  // Lógica de dibujo (Touch para móviles)
+  startDrawingTouch(event: TouchEvent) {
+    event.preventDefault();
+    this.isDrawing = true;
+    const touch = event.touches[0];
+    const rect = this.canvasRef.nativeElement.getBoundingClientRect();
+    this.ctx.beginPath();
+    this.ctx.moveTo(touch.clientX - rect.left, touch.clientY - rect.top);
+  }
+
+  drawTouch(event: TouchEvent) {
+    event.preventDefault();
+    if (!this.isDrawing) return;
+    const touch = event.touches[0];
+    const rect = this.canvasRef.nativeElement.getBoundingClientRect();
+    this.ctx.lineTo(touch.clientX - rect.left, touch.clientY - rect.top);
+    this.ctx.stroke();
+  }
+
+  stopDrawing() {
+    this.isDrawing = false;
+    this.ctx.beginPath();
+  }
+
+  limpiarFirma() {
+    this.ctx.clearRect(0, 0, this.canvasRef.nativeElement.width, this.canvasRef.nativeElement.height);
+  }
+
+  toggleCheck(controlName: string, value: boolean) {
+    this.adminForm.get(controlName)?.setValue(value);
+  }
+
+  public async imprimirTodoEnUno() {
+    const element = document.getElementById('seccion-admin');
+    if (element) {
+      const canvas = await html2canvas(element, { scale: 2, useCORS: true });
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF('p', 'mm', 'a4');
-      
-      const imgWidth = 210; 
-      const pageHeight = 297; 
+      const imgWidth = 210;
       const imgHeight = (canvas.height * imgWidth) / canvas.width;
-      
-      // Añadimos la imagen al PDF
       pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
-      
-      // Descarga el archivo
-      pdf.save('Paz_y_Salvo_Administrativo.pdf');
-      
-      alert('¡PDF descargado con éxito!');
-    }).catch(err => {
-      console.error('Error al generar PDF:', err);
-      alert('Ocurrió un error técnico: ' + err.message);
-    });
-  }
-
-  guardarAdministrativo() {
-    if (this.adminForm.valid) {
-      console.log('Datos:', this.adminForm.value);
-      alert('Datos guardados correctamente.');
-    } else {
-      this.adminForm.markAllAsTouched();
-      alert('Por favor, complete los campos obligatorios.');
+      pdf.save('Paz_y_Salvo_INAMHI.pdf');
     }
   }
 }
